@@ -3,6 +3,22 @@ package connectfourvag;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Connect Four Game implemented in Java.
+ *
+ * This is a two-player turn-based game where players take turns dropping
+ * their respective tokens ('●' and '○') into a 7-column, 6-row grid.
+ * The goal is to connect four of the same tokens in a row, column, or diagonal.
+ *
+ * Features:
+ * - Validates user input.
+ * - Checks for winning conditions.
+ * - Provides an option to play again.
+ *
+ * Author: Vaggelis Theodorakis
+ * Date: February 2025
+ */
+
 public class ConnectFourVag {
 
     static Scanner sc = new Scanner(System.in);
@@ -93,7 +109,12 @@ public class ConnectFourVag {
         }
 
     }
-    // Validates and retrieves player names
+    /**
+     * Prompts the user for their name and ensures it's valid.
+     *
+     * @param prompt The message shown to the player.
+     * @return The validated player name.
+     */
     public static String getValidName(String prompt) {
         String playerName;
         while (true) {
@@ -114,7 +135,12 @@ public class ConnectFourVag {
         return playerName;
     }
 
-    // Ensures the entered number is between 1 and 7
+    /**
+     * Gets a valid column number from the user and finds the correct row placement.
+     *
+     * @param board The game board.
+     * @return An array containing the row and column for the move.
+     */
     public static int[] getValidInteger(char[][] board) {
         int userInteger = 0;
         int row;
@@ -139,7 +165,13 @@ public class ConnectFourVag {
         }
     }
 
-    // Checks if a position on the board is free
+    /**
+     * Finds the lowest available row in a given column.
+     *
+     * @param board The game board.
+     * @param col The column number (1-7).
+     * @return The row index where the token will be placed, or -1 if the column is full.
+     */
     public static int findFreePosition(char[][] board, int col) {
 
         for (int i = 0; i < ROWS; i++) {
@@ -150,7 +182,11 @@ public class ConnectFourVag {
         return -1;
     }
 
-    // Prints the current state of the board
+    /**
+     * Prints the current state of the game board.
+     *
+     * @param board The game board.
+     */
     public static void printBoard(char[][] board) {
         System.out.println(" 1 2 3 4 5 6 7 ");
         System.out.println("---------------");
@@ -163,7 +199,14 @@ public class ConnectFourVag {
         System.out.println("---------------");
     }
 
-    // Determines if the match has ended with a winner
+    /**
+     * Checks if there is a winning condition on the board.
+     * A player wins if they connect four of their symbols (● or ○)
+     * in a row, column, or diagonal.
+     *
+     * @param connectFourBoard The current state of the game board.
+     * @return true if there is a winner, false otherwise.
+     */
     public static boolean matchIsOver(char[][] connectFourBoard) {
         // Check horizontal, vertical, and diagonal lines for a win
         for (int row = 0; row < ROWS; row++) {
@@ -210,7 +253,14 @@ public class ConnectFourVag {
         return false; // No winner found
     }
 
-    // Switches the current player's symbol for the next turn
+    /**
+     * Switches the current player and prompts them to take a turn.
+     *
+     * @param currentPlayerSymbol The current player's symbol.
+     * @param namePlayer1 Player 1's name.
+     * @param namePlayer2 Player 2's name.
+     * @return The symbol of the next player.
+     */
     public static char switchPlayerSymbol(char currentPlayerSymbol, String namePlayer1, String namePlayer2) {
         if (currentPlayerSymbol == '●') {
             System.out.printf("%s, it's your turn \n", namePlayer2);
